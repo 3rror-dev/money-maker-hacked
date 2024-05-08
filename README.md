@@ -31,3 +31,16 @@ Because of this bug, I can't write what I hacked in the game's changelogs, so I'
 4. The intro animation got changed! The original creator, **`ECONOMICAL GAMES`** has been strikethroughed, and below it has been added the text "`HACKED BY `**`ERROR DEV`**".
 5. The extention's version has been changed to _`7.7.0`_, with _`0`_ in place for '_`Hacked`_', which you can see in the game, it says `"V7.7.HACKED"`.
 6. The extension's **name** and **short name** has been edited (can be seen in the `manifest.json` file. The **name** is now "Make Money | Hacked by Error Dev" and the **short name** is now "Make Money | Hacked".
+
+## PREVIEWS
+![image](https://github.com/3rror-dev/money-maker-hacked/assets/116144887/ecad724b-1dc9-4dc1-9c02-cfdf9ea8cd92)
+
+![image](https://github.com/3rror-dev/money-maker-hacked/assets/116144887/e6cc6d28-0720-4df1-9f74-b13007df6c41)
+
+![image](https://github.com/3rror-dev/money-maker-hacked/assets/116144887/5991e7f1-10e6-4c3f-9cfc-e7cc4168ad5c)
+
+![image](https://github.com/3rror-dev/money-maker-hacked/assets/116144887/ec9df546-44af-445a-b077-85b0a68c6abc)
+
+![image](https://github.com/3rror-dev/money-maker-hacked/assets/116144887/6281e598-73d8-40d2-b35d-8f273a9b80f9)
+
+![image](https://github.com/3rror-dev/money-maker-hacked/assets/116144887/1fc1acaf-d4ae-43a9-a4fb-6ec2c687972d)
