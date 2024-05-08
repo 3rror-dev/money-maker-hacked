@@ -28,6 +28,6 @@ Because of this bug, I can't write what I hacked in the game's changelogs, so I'
 1. The help section has been updated. The **navigation** section now has details on the _UTE_.
 2. The **money** and **upgrades** tab names are now bold as they are very much the most important.
 3. The **updates** tab button has been _disabled_ and _rendered unusable_.
-4. The intro animation got changed! The original creator, **ECONOMICAL GAMES** has been strikethroughed, and below it has been added the text "HACKED BY **ERROR DEV**".
-5. The extention's version has been changed to _7.7.0_, with _0_ in place for '_Hacked_', which you can see in the game, it says "V7.7.HACKED".
+4. The intro animation got changed! The original creator, **`ECONOMICAL GAMES`** has been strikethroughed, and below it has been added the text "`HACKED BY `**`ERROR DEV`**".
+5. The extention's version has been changed to _`7.7.0`_, with _`0`_ in place for '_`Hacked`_', which you can see in the game, it says `"V7.7.HACKED"`.
 6. The extension's **name** and **short name** has been edited (can be seen in the `manifest.json` file. The **name** is now "Make Money | Hacked by Error Dev" and the **short name** is now "Make Money | Hacked".
