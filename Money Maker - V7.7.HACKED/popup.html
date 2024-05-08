@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+    <html>
+        
+        <head>
+
+            <style>
+
+                /* Parameters for extension popup */
+
+                body {
+                    width: 250px;
+                    min-height: 470px;
+
+                    font-family: "Trebuchet MS";
+
+                    overflow-x: hidden;
+                    overflow-y: hidden;
+                }
+
+                /* Parameters for intro screen */
+
+                .introScreen {
+                    position: absolute;
+                    top: 140px;
+                    left: 0px;
+
+                    width: 266px;
+
+                    text-align: center;
+                }
+
+                .introWords {
+                    font-size: 20px;
+                    font-style: italic;
+                }
+
+                /* Parameters for "everything else" */
+
+                .contents {
+                    opacity: 0;
+
+                    pointer-events: none;
+                }
+
+                /* Parameters for title */
+
+                .title {
+                    position: relative;
+                    top: 25px;
+
+                    text-align: center;
+                }
+
+                .titleWords {
+                    font-size: 30px;
+                }
+
+                /* Parameters for version information */
+
+                .verInfo {
+                    position: absolute;
+                    top: 3px;
+                    left: 4px;
+
+                    font-size: 10px;
+                }
+
+                /* Parameters for settings button */
+
+                button.settings {
+                    position: absolute;
+                    top: 7px;
+                    right: 10px;
+
+                    width: 20px;
+                    height: 20px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.settings:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for settings area */
+
+                .settingsArea {
+                    position: absolute;
+                    top: 80.5px;
+                    left: 10px;
+
+                    display: none;
+
+                    width: 246px;
+
+                    text-align: center;
+                }
+
+                .settingsBorder {
+                    border: 0;
+                    border-top: 1px solid #000000;
+                    margin: 1em 0;
+                    padding: 0;
+                }
+
+                .settingsWord {
+                    font-size: 20px;
+                }
+
+                .decimalSetting {
+                    font-size: 15px;
+                }
+
+                .decimalSlider {
+                    position: relative;
+                    top: -7px;
+                }
+
+                .digitsFont {
+                    position: relative;
+                    top: -4px;
+                    left: -2px;
+
+                    font-size: 15px;
+
+                    transition: 0.2s;
+                }
+
+                button.settingsBack {
+                    position: absolute;
+                    bottom: 57px;
+                    left: 18px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.settingsBack:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                .saveNote {
+                    position: absolute;
+                    bottom: 42px;
+                    left: 87px;
+
+                    padding-right: 15px;
+
+                    display: none;
+
+                    font-size: 12px;
+                }
+
+                /* Parameters for prestige button */
+
+                button.prestige {
+                    position: absolute;
+                    top: 7px;
+                    right: 35px;
+
+                    width: 60px;
+                    height: 20px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.prestige:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for prestige area */
+
+                .prestigeArea {
+                    position: absolute;
+                    top: 80.5px;
+                    left: 10px;
+
+                    display: none;
+
+                    width: 246px;
+
+                    text-align: center;
+                }
+
+                .prestigeBorder {
+                    border: 0;
+                    border-top: 1px solid #000000;
+                    margin: 1em 0;
+                    padding: 0;
+                }
+
+                .prestigeWord {
+                    font-size: 20px;
+                }
+
+                .prestigeText {
+                    font-size: 12px;
+                }
+
+                button.doPrestigeButton {
+                    height: 60px;
+                    width: 200px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.doPrestigeButton:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                .prestigeGet {
+                    font-size: 16px;
+                }
+
+                button.prestigeBack {
+                    position: absolute;
+                    bottom: 27px;
+                    left: 18px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.prestigeBack:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for casino button */
+
+                button.casino {
+                    position: absolute;
+                    top: 7px;
+                    right: 101px;
+
+                    width: 55px;
+                    height: 20px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.casino:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for casino area */
+
+                .casinoArea {
+                    position: absolute;
+                    top: 80.5px;
+                    left: 10px;
+
+                    display: none;
+
+                    width: 246px;
+
+                    text-align: center;
+                }
+
+                .casinoBorder {
+                    border: 0;
+                    border-top: 1px solid #000000;
+                    margin: 1em 0;
+                    padding: 0;
+                }
+
+                .casinoWord {
+                    font-size: 20px;
+                }
+
+                .casinoMoney {
+                    font-size: 15px;
+                }
+
+                .slotDiv {
+                    position: absolute;
+                    top: 100px;
+                    
+                    width: 50px;
+                    height: 60px;
+
+                    border: 1px solid #000000;
+                }
+
+                #slot_1 {
+                    left: 42px;
+                }
+
+                #slot_2 {
+                    left: 97px;
+                }
+
+                #slot_3 {
+                    left: 152px;
+                }
+
+                .casinoText {
+                    font-size: 12px;
+                }
+
+                button.gambleButton {
+                    position: relative;
+                    top: -5px;
+
+                    height: 22px;
+                    width: 75px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.gambleButton:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                .gambleMessage {
+                    font-size: 12px;
+                }
+
+                button.casinoBack {
+                    position: absolute;
+                    bottom: 27px;
+                    left: 18px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.casinoBack:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for switching screen buttons */
+
+                .switchingButtons {
+                    position: relative;
+                    top: 50px;
+                    left: -8px;
+                }
+
+                button.switchButton {
+                    position: absolute;
+
+                    height: 22px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    border-bottom: 0.5px solid #000000;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.switchButton:hover {
+                    border-top: 0.5px solid #777777;
+                    border-left: 0.5px solid #777777;
+                    border-right: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                .switchIncome {
+                    left: 49px;
+                }
+
+                .switchUpgrades {
+                    left: 101.5px;
+                }
+
+                .switchUpdates {
+                    left: 166.5px;
+                }
+
+                .switchHelp {
+                    left: 224px;
+
+                    width: 42px;
+                }
+
+                /* Parameters for money screen */
+
+                .moneyScreen {
+                    position: relative;
+                    top: 95px;
+
+                    text-align: center;
+                }
+
+                .incomeData {
+                    font-size: 13px;
+                }
+
+                .moneyWord {
+                    font-size: 17px;
+                }
+
+                .moneyscreenMoney {
+                    position: relative;
+                    top: 5px;
+
+                    font-size: 22px;
+                }
+
+                .moneyscreenStatus {
+                    font-size: 12px;
+                    font-style: italic;
+                }
+
+                /* Parameters for buying area (still included in money screen) */
+
+                .buyArea {
+                    display: none;
+                }
+
+                .buyStatus {
+                    font-size: 12px;
+                }
+
+                button.buyButton {
+                    position: relative;
+                    top: 10px;
+
+                    height: 25px;
+                    width: 50px;
+
+                    font-size: 14px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.buyButton:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Earning button */
+
+                button.earnButton {
+                    position: relative;
+                    top: 7px;
+
+                    height: 80px;
+                    width: 100px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background: linear-gradient(to bottom, #F4F4F4, #E5E5E5);
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.earnButton:hover {
+                    border: 0.5px solid #777777;
+                    background: linear-gradient(to bottom, #F9F9F9, #F4F4F4);
+                }
+
+                button.earnButton:active {
+                    border: 0.5px solid #777777;
+                    background: linear-gradient(to top, #F9F9F9, #F4F4F4);
+                }
+                
+                .bonusClicks {
+                    position: relative;
+                    top: -7px;
+
+                    padding-bottom: 10px;
+                }
+
+                .bonusClicksStuffs {
+                    position: relative;
+                    top: -3px;
+
+                    font-size: 14px;
+                }
+
+                button.bonusClicksUse {
+                    position: relative;
+                    top: 5px;
+
+                    height: 26px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.bonusClicksUse:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for income screen */
+
+                .incomeScreen {
+                    position: relative;
+                    top: 95px;
+
+                    display: none;
+
+                    text-align: center;
+                }
+
+                .incomescreenIncome {
+                    font-size: 16px;
+                }
+
+                .incomeNumber {
+                    position: relative;
+                    top: 7px;
+
+                    font-size: 18px;
+                }
+
+                .boosts {
+                    font-size: 14px;
+                }
+
+                .possessionsWord {
+                    position: relative;
+                    top: 7px;
+
+                    font-size: 16px;
+                }
+
+                .possessions {
+                    position: relative;
+                    top: -5px;
+
+                    font-size: 12px;
+                }
+
+                .incomeNavigation {
+                    position: absolute;
+                    bottom: 27px;
+                }
+
+                button.incomeBack {
+                    position: relative;
+                    left: 10px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.incomeBack:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                button.incomeNext {
+                    position: relative;
+                    left: 188px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.incomeNext:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for upgrades screen */
+
+                .upgradesScreen {
+                    position: relative;
+                    top: 95px;
+
+                    display: none;
+
+                    text-align: center;
+                }
+
+                .upgradeCategory {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+
+                .upgradeSeparator {
+                    border: 0;
+                    border-top: 1px solid #000000;
+                    margin: 1em 0;
+                    padding: 0;
+                }
+
+                .upgradeName {
+                    float: left;
+                    margin-left: 20px;
+
+                    font-size: 15px;
+                }
+
+                .upgradeDesc {
+                    float: left;
+                    margin-left: 20px;
+                    margin-right: 120px;
+
+                    text-align: left;
+                    font-size: 12px;
+                }
+
+                .upgradeCost {
+                    float: right;
+                    margin-right: 25px;
+
+                    font-size: 13px;
+                }
+
+                button.upgradeBuy {
+                    position: absolute;
+                    right: 20px;
+
+                    margin-top: -5px;
+
+                    height: 35px;
+                    width: 60px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.upgradeBuy:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                .bonusClicksInfo {
+                    position: relative;
+                    top: -5px;
+
+                    font-size: 11px;
+                }
+
+                /* Parameters for updates screen */
+
+                .updatesScreen {
+                    position: relative;
+                    top: 95px;
+
+                    display: none;
+
+                    text-align: left;
+                }
+
+                .updates {
+                    position: relative;
+                    left: 10px;
+                }
+
+                .updatesAdditionalPages {
+                    display: none;
+                }
+
+                .updatesTitle {
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+
+                .updatesText {
+                    display: block;
+
+                    padding-right: 10px;
+                    margin-right: 10px;
+                    font-size: 12px;
+                }
+
+                button.updatesBack {
+                    position: absolute;
+                    left: 20px;
+                    bottom: 27px;
+                    
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.updatesBack:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                button.updatesNext {
+                    position: absolute;
+                    right: 20px;
+                    bottom: 27px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.updatesNext:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                /* Parameters for help screen */
+
+                .helpScreen {
+                    position: relative;
+                    top: 95px;
+
+                    display: none;
+
+                    text-align: left;
+                }
+
+                button.helpBack {
+                    position: absolute;
+                    left: 20px;
+                    bottom: 27px;
+                    
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.helpBack:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                button.helpNext {
+                    position: absolute;
+                    right: 20px;
+                    bottom: 27px;
+
+                    display: none;
+
+                    height: 22px;
+                    width: 52px;
+
+                    font-size: 12px;
+
+                    border: 0.5px solid #C6C6C6;
+                    outline: none;
+                    background-color: #F4F4F4;
+
+                    cursor: pointer;
+
+                    transition-duration: 0.2s;
+                }
+
+                button.helpNext:hover {
+                    border: 0.5px solid #777777;
+                    background-color: #F9F9F9;
+                }
+
+                .helpContent {
+                    position: relative;
+                    left: 10px;
+                }
+
+                .helpHeading {
+                    font-weight: bold;
+                    font-size: 15px;
+                }
+
+                .helpText {
+                    display: block;
+                    
+                    padding-right: 7px;
+                    margin-right: 7px;
+                    font-size: 12px;
+                }
+
+                .helpAdditionalPages {
+                    display: none;
+                }
+            
+            </style>
+
+            <script src = "minified_popup.js"></script> <!-- Unminified for testing! -->
+
+        </head>
+
+        <body>
+
+            <!-- Intro screen -->
+
+            <div class = "introScreen" id = "intro_screen">
+
+                <font class = "introWords"><s>ECONOMICAL GAMES</s></font>
+                <br>
+                <br>
+                <font class = "introWords">HACKED BY</font>
+                <br>
+                <font class = "introWords"><strong>ERROR DEV</strong></font>
+                <br>
+                <br>
+                <img src = "images/logo.png"></img>
+
+            </div>
+
+            <!-- Everything else -->
+
+            <div class = "contents" id = "popup_contents">
+
+                <!-- Version information -->
+
+                <font class = "verInfo">V7.7.HACKED</font>
+
+                <!-- Settings button -->
+
+                <button class = "settings" id = "settings_button"><img src = "images/settings-icon.png" style = "position: relative; top: -1px; left: -6px;"></img></button>
+
+                <!-- Prestige button -->
+
+                <button class = "prestige" id = "prestige_button">Prestige</button>
+
+                <!-- Casino button -->
+
+                <button class = "casino" id = "casino_button">Casino</button>
+
+                <!-- Title area -->
+
+                <div class = "title">
+
+                    <font class = "titleWords">Make Money</font>
+
+                </div>
+
+                <!-- Settings area -->
+
+                <div class = "settingsArea" id = "settings_area">
+
+                    <hr class = "settingsBorder">
+                    <font class = "settingsWord">Settings</font>
+                    <br>
+                    <br>
+                    <br>
+                    <font class = "decimalSetting">Number of Decimal Digits</font>
+                    <br>
+                    <br>
+                    <input class = "decimalSlider" id = "decimal_slider" type = "range" min = "2" max = "4">
+                    <br>
+                    <font class = "digitsFont" id = "settings_digits_2">2</font>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <font class = "digitsFont" id = "settings_digits_3">3</font>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <font class = "digitsFont" id = "settings_digits_4">4</font>
+
+                </div>
+
+                <!-- Prestige area -->
+
+                <div class = "prestigeArea" id = "prestige_area">
+
+                    <hr class = "prestigeBorder">
+                    <font class = "prestigeWord">Prestige</font>
+                    <br>
+                    <br>
+                    <font class = "prestigeText">Prestiging gives you a permanent income boost. When you prestige, all your progress will be reset including upgrades and bonus clicks. However, you will get (your number of items - 10) prestige points. Each prestige point gives a <s>+50%</s> <strong>+100%!</strong> income boost and does not get reset when you prestige again! Prestiging is very useful if you are stuck and cannot make any progress. This way, you can prestige and gain income boost and get back there faster and make more progress.</font>
+                    <br>
+                    <br>
+                    <button class = "doPrestigeButton" id = "do_prestige_button">
+
+                        PRESTIGE AND EARN
+                        <br>
+                        <font class = "prestigeGet" id = "prestige_get">0</font>
+                        <br>
+                        PRESTIGE POINTS
+
+                    </button>
+
+                </div>
+
+                <!-- Casino area -->
+
+                <div class = "casinoArea" id = "casino_area">
+
+                    <hr class = "casinoBorder">
+                    <font class = "casinoWord">Casino</font>
+                    <br>
+                    <br>
+                    <font class = "casinoMoney">Money:</font>
+                    <font class = "casinoMoney" id = "casino_money"></font>
+                    <br>
+                    <br>
+
+                    <div class = "slotDiv" id = "slot_1"><font size = "7" id = "slot_1_digit" style = "position: relative; top: 2px;">0</font></div>
+                    <div class = "slotDiv" id = "slot_2"><font size = "7" id = "slot_2_digit" style = "position: relative; top: 2px;">0</font></div>
+                    <div class = "slotDiv" id = "slot_3"><font size = "7" id = "slot_3_digit" style = "position: relative; top: 2px;">0</font></div>
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>         
+                    <font class = "casinoText" id = "casino_help" style = "position: relative; top: 2px;">MORE INFO ON CASINO IN HELP</font>
+                    <br>
+                    <br>
+                    <input type = "number" id = "gamble_input"></input>
+                    <br>
+                    <br>
+                    <button class = "gambleButton" id = "gamble_button">GAMBLE</button>
+                    <br>
+                    <br>
+                    <font class = "gambleMessage" id = "gamble_message"></font>
+
+                </div>
+
+                <!-- Settings back button and saving message -->
+
+                <button class = "settingsBack" id = "settings_back">Back</button>
+                <font class = "saveNote" id = "settings_save_note">NOTE: Due to limitations of chrome storage, any changes or progress can only be saved once every 4 seconds!</font>
+
+                <!-- Prestige back button -->
+
+                <button class = "prestigeBack" id = "prestige_back">Back</button>
+
+                <!-- Casino back button -->
+
+                <button class = "casinoBack" id = "casino_back">Back</button>
+
+                <!-- Content area -->
+
+                <div id = "content_area">
+
+                    <!-- Switching screens button area -->
+
+                    <div class = "switchingButtons">
+
+                        <button class = "switchButton switchMoney" id = "money_switch"><strong>Money</strong></button>
+                        <button class = "switchButton switchIncome" id = "income_switch">Income</button>
+                        <button class = "switchButton switchUpgrades" id = "upgrades_switch"><strong>Upgrades</strong></button>
+                        <button class = "switchButton switchUpdates" id = "updates_switch" disabled><s>Updates</s></button>
+                        <button class = "switchButton switchHelp" id = "help_switch">Help</button>
+
+                    </div>
+
+                    <!-- Main screen area -->
+
+                    <div class = "screen moneyScreen" id = "money_screen">
+
+                        <font class = "incomeData">Income:</font>
+                        <font class = "incomeData" id = "moneyscreen_income"></font>
+                        <br>
+                        <br>
+                        <font class = "moneyWord">Money:</font>
+                        <br>
+                        <br>
+                        <font class = "moneyscreenMoney" id = "moneyscreen_money"></font>
+                        <br>
+                        <br>
+                        <br>
+                        <font class = "moneyscreenStatus" id = "status"></font>
+                        <br>
+                        <br>
+
+                        <!-- Item purchase area -->
+
+                        <div class = "buyArea" id = "buy_area">
+
+                            <font class = "buyStatus" id = "buy_status"></font>
+                            <br>
+                            <button class = "buyButton" id = "buy_button">Buy</button>
+                            <br>
+                            <br>
+                
+                        </div>
+
+                        <!-- Earn money button -->
+
+                        <button class = "earnButton" id = "earn_button">Earn</button>
+
+                        <br>
+                        <br>
+                        <br>
+
+                        <!-- Bonus clicks area -->
+
+                        <div class = "bonusClicks">
+
+                            <font class = "bonusClicksStuffs">Bonus Clicks:</font>
+                            <br>
+                            <font class = "bonusClicksStuffs" id = "amount_bonus_clicks">0</font> <font class = "bonusClicksStuffs" id = "bonus_click_rate"></font>
+                            <br>
+
+                            <!-- Bonus clicks use button -->
+
+                            <button class = "bonusClicksUse" id = "bonus_clicks_use">Use</button>
+
+                            <!-- Space -->
+
+                            <br>
+                            <br>
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Income screen area -->
+
+                    <div class = "incomeScreen" id = "income_screen">
+
+                        <div class = "incomeScreen1" id = "income_screen_pg1">
+
+                            <font class = "incomescreenIncome" id = "incomescreen_income_word">Total Income:</font>
+                            <br>
+                            <font class = "incomeNumber" id = "incomescreen_income"></font>
+                            <br>
+                            <br>
+                            <font class = "boosts" id = "prestige_points_word">Prestige Points:</font>
+                            <font class = "boosts" id = "prestige_points_info"></font>
+                            <br>
+                            <font class = "boosts" id = "boosts_word">Income Boosts:</font>
+                            <font class = "boosts" id = "boosts_number"></font>
+                            <br>
+                            <font class = "boosts" id = "total_boost_word">Total Boost:</font>
+                            <font class = "boosts" id = "total_boost_number"></font>
+                            <br>
+                            <br>
+                            <font class = "possessionsWord" id = "possession_word">Possessions:</font>
+                            <br>
+                            <br>
+                            <br>
+                            <font class = "possessions" id = "possessions_pg1"></font>
+
+                        </div>
+
+                        <div class = "incomeScreen2" id = "income_screen_pg2">
+
+                            <font class = "possessions" id = "possessions_pg2"></font>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Income navigation buttons -->
+
+                    <div class = "incomeNavigation" id = "income_navigation">
+
+                        <button class = "incomeBack" id = "income_back">Back</button>
+                        <button class = "incomeNext" id = "income_next">Next</button>
+
+                    </div>
+
+                    <!-- Upgrades screen area -->
+
+                    <div class = "upgradesScreen" id = "upgrades_screen">
+
+                        <font class = "upgradeCategory">BOOSTS</font>
+                        <br>
+                        
+                        <!-- Basic income booster -->
+
+                        <div id = "income_boost">
+
+                            <hr class = "upgradeSeparator">
+                            <font class = "upgradeName">INCOME BOOST</font>
+                            <font class = "upgradeCost" id = "income_boost_cost"></font>
+                            <br>
+                            <br>
+                            <font class = "upgradeDesc">Increases total income by 10%</font>
+                            <button class = "upgradeBuy" id = "income_boost_buy"><font id = "income_boost_inbutton"></font></button>
+                            <br>
+                            <br>
+                            <hr class = "upgradeSeparator">
+
+                        </div>
+
+                        <!-- Bonus clicks -->
+
+                        <div id = "bonus_clicks">
+
+                            <font class = "upgradeName">BONUS CLICKS</font>
+                            <font class = "upgradeCost" id = "bonus_clicks_cost"></font>
+                            <br>
+                            <br>
+                            <font class = "upgradeDesc">Increases bonus click rate by 0.1</font>
+                            <button class = "upgradeBuy" id = "bonus_clicks_buy"><font id = "bonus_clicks_inbutton"></font></button>
+                            <br>
+                            <br>
+                            <hr class = "upgradeSeparator">
+                            <font class = "bonusClicksInfo" style = "font-style: italic;">Bonus clicks are extra clicks that you get every time you click. These extra clicks are saved up. When used, they give you that many clicks worth of money, but are consumed.</font>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Updates screen area -->
+
+                    <div class = "updatesScreen" id = "updates_screen">
+                        
+                        <!-- Page 1 -->
+
+                        <div class = "updates" id = "updates_pg1">
+
+                            <font class = "updatesTitle">UPDATE 7.7.HACKED(OP)</font>
+                            <br>
+                            <font class = "updatesTitle">May 8 2024</font>
+                            <br>
+                            <br>
+                            <font class = "updatesText">HACKED BY ERROR DEV!!!!</font>
+                            <br>
+                            <font class = "updatesText">This clicker game just got hacked by ERROR DEV! Here are some changes & info:</font>
+                            <br>
+                            <font class = "updatesText">INFO:</font>
+                            <br>
+                            <font class = "updatesText">This hacked version of the clicker game WILL NOT be like the other modded types! Details:</font>
+                            <br>
+                            <font class = "updatesText">- No infinite money! That's not gonna happen!</font>
+                            <br>
+                            <font class = "updatesText">- Prestiging is TWICE as OP! Instead of a perma 50% boost, it's now 100%!</font>
+                            <br>
+                            <font class = "updatesText">- Items are TWICE as OP! The amount of extra income per click is multiplied by A HUNDRED!</font>
+                            <br>
+                            <font class = "updatesText">- Upgrades are ON SALE! Upgrade prices are now HALVED!!</font>
+                            <br>
+                            <font class = "updatesText">- Removed all the other pages because reason:"useless"</font>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Help screen area -->
+
+                    <div class = "helpScreen" id = "help_screen">
+
+                        <div class = "helpContent">
+
+                            <!-- Page 1 -->
+
+                            <div id = "help_pg1">
+
+                                <font class = "helpHeading">Basics</font>
+                                <br>
+                                <br>
+                                <font class = "helpText">Make Money is a simple clicking game in which you try to earn as much money as possible. Click the earn button and gain an amount of money money equal to your income.</font>
+                                <br>
+                                <font class = "helpHeading">Navigation</font>
+                                <br>
+                                <br>
+                                <font class = "helpText">Make Money is split into seven main areas. The money tab is the main tab in which you can earn money. The income tab allows you to view all of your possessions. The upgrades tab contains upgrades to improve your income and items. <s>The updates tab contains all past update notes.</s> The updates tab is currently hacked and under construction. For some reason once you click on it, all the other pages become blank. AKA the game becomes unplayable. <s>We</s> I removed the function to go to that page so to avoid the error. The help tab is for help. The settings area allows you to adjust the options of the game. The prestige area is for prestiging to gain prestige points. The casino tab is for gambling money (more information in casino section).</font>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+
+                            </div>
+
+                            <!-- Page 2 -->
+
+                            <div class = "helpAdditionalPages" id = "help_pg2">
+
+                                <font class = "helpHeading">Items</font>
+                                <br>
+                                <br>
+                                <font class = "helpText">Items increase your income, but will cost money to purchase. An item will be purchasable when you have three times the cost of the item. Items can greatly increase your income and will help you progress much faster.</font>
+                                <br>
+                                <font class = "helpHeading">Upgrades</font>
+                                <br>
+                                <br>
+                                <font class = "helpText">Upgrades increase your income and make it easier to progress in the game. Upgrades cost a certain amount of money, but are usually good to purchase.</font>
+
+                            </div>
+
+                            <!-- Page 3 -->
+
+                            <div class = "helpAdditionalPages" id = "help_pg3">
+
+                                <font class = "helpHeading">Casino</font>
+                                <br>
+                                <br>
+                                <font class = "helpText">You can gamble money in the casino. You are allowed to bet any amount of money that you have. The slot machine generates 3 random numbers from 1 to 7 inclusive. Getting all 3 7s multiplies your bet by 25, while getting 2 7s multiplies your bet by 8. Getting 3 of any other number also multiplies your bet by 8, and getting 2 of any other number multiplies your bet by 3. Any other combination is a loss, and you receive no money and lose your bet.</font>
+ 
+                            </div>
+
+                        </div>
+                
+                    </div>
+
+                    <!-- Updates navigation buttons -->
+
+                    <button class = "updatesBack" id = "updates_back">Back</button>
+                    <button class = "updatesNext" id = "updates_next">Next</button>
+
+                    <!-- Help navigation buttons -->
+
+                    <button class = "helpBack" id = "help_back">Back</button>
+                    <button class = "helpNext" id = "help_next">Next</button>
+
+                </div>
+
+            </div>
+
+        </body>
+
+    </html>
