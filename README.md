@@ -1,4 +1,4 @@
-# Money Maker | Hacked
+# <img src="./dollar_bill.ico" width=32 height=32> Money Maker | Hacked
 Have you played the chromium extension clicker game 'Make Money'?
 Have you thought that it's very slow, even with an autoclicker and takes up too much time to progress?
 Well you're in luck because **I've just hacked it to make it easier**!
